@@ -1,0 +1,22 @@
+{
+  "name": "selvesan/php7mvc",
+  "description": "php7 custom mvc frameword",
+  "authors": [
+    {
+      "name": "selvesan",
+      "email": "dev.selvesan@gmail.com"
+    }
+  ],
+  "require": {
+  },
+  "autoload": {
+    "psr-4": {
+      "Application\\": "../php7mvc"
+    },
+    "files": [
+      "System/helpers/helpers.php"
+    ],
+    "classmaps": [
+    ]
+  }
+}
