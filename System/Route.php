@@ -7,9 +7,13 @@ use Application\System\Exception\NotFoundException;
 
 class Route
 {
+    /**
+     * @param $controllerMethod
+     * @throws InvalidRequestException
+     * @throws NotFoundException
+     */
     private function callController($controllerMethod)
     {
-
         $controllerMethod = explode('@', $controllerMethod);
         if (count($controllerMethod) < 2) throw new InvalidRequestException('Must pass a controller and a method name separated by @');
 
@@ -27,9 +31,16 @@ class Route
 
         if (!method_exists($controllerObj, $methodName)) throw new NotFoundException('Method not found ' . $methodName);
         $controllerObj->$methodName();
-
+        return true;
     }
 
+
+    /**
+     * @param string $requestUri
+     * @param string $controllerMethod
+     * @return bool
+     * @throws InvalidRequestException
+     */
     public function get(string $requestUri, string $controllerMethod)
     {
 
@@ -45,6 +56,11 @@ class Route
         }
     }
 
+    /**
+     * @param string $requestUri
+     * @param string $controllerMethod
+     * @return bool
+     */
     public function post(string $requestUri, string $controllerMethod)
     {
         if (!Request::method('post')) return false;

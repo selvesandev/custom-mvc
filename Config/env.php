@@ -7,6 +7,6 @@ if ($_SERVER['REMOTE_ADDR'] === '127.0.0.1') {
 
 return [
     'env' => $env,
-    'host' => 'dev.php7mvc.com',
+    'host' => 'http://dev.php7mvc.com',
     'display_errors' => true
 ];

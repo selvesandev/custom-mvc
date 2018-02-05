@@ -21,12 +21,16 @@ class Config
 
         $getValues = explode('.', $getValue);
 
+
         if (count($getValues) < 1) throw new InvalidRequestException('Must pass config keys');
 
-        $file = $getValues[0] . '.php';
+        $file = array_shift($getValues);
+        $file .= '.php';
 
         if (file_exists(rootPath('Config/' . $file))) {
-            $configurations = require_once rootPath('Config/' . $file);
+
+            $configurations = require rootPath('Config/' . $file);
+
             foreach ($getValues as $value) {
                 if (isset($configurations[$value])) {
                     $configurations = $configurations[$value];
@@ -38,7 +42,6 @@ class Config
             }
             return $configurations;
         }
-
         throw new  NotFoundException('Configuration File not found ' . $file);
     }
 }

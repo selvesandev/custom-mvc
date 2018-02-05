@@ -2,7 +2,9 @@
 
 namespace Application\App\Controllers\Frontend;
 
-class AppController
+use Application\App\Controllers\Controller;
+
+class AppController extends Controller
 {
     private $_page = 'Frontend';
 

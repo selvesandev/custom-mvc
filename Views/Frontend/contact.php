@@ -3,7 +3,8 @@
 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Deleniti ea eligendi hic illo illum itaque nobis nostrum
     quae, quod saepe sint sit vel. Cupiditate et mollitia nam nesciunt repellendus sint.</p>
 <hr>
-<form action="http://dev.php7mvc.com/contact" method="post">
+
+<form action="<?= url('/contact') ?>" method="post">
     <p>
         <label for="">Email</label><br>
         <input type="text" name="email">
