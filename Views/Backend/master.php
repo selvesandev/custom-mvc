@@ -10,9 +10,7 @@
         <?php require_once 'pages/' . $page ?>
 
         <?php require_once 'includes/footer.php' ?>
-
     </div>
 </div>
-
 
 <?php require_once 'includes/foot.php' ?>

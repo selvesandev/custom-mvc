@@ -3,6 +3,7 @@
 namespace Application\App\Controllers\Frontend;
 
 use Application\App\Controllers\Controller;
+use Application\System\Validation;
 
 class AppController extends Controller
 {

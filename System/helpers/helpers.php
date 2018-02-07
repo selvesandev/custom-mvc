@@ -18,6 +18,8 @@ if (!function_exists('view')) {
     {
         if (empty($name)) throw new \Application\System\Exception\InvalidRequestException("View name cannot be empty");
 
+        $name = str_replace('.php', '', $name);
+
         $view = $name . '.php';
         extract($data);
         unset($data);

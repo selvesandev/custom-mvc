@@ -14,4 +14,9 @@ class BackendController extends Controller
         $this->_data['page'] = 'home.php';
         return view('Backend/master', $this->_data);
     }
+
+    public function add()
+    {
+
+    }
 }
