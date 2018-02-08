@@ -3,6 +3,8 @@
 namespace Application\App\Controllers\Backend;
 
 use Application\App\Controllers\Controller;
+use Application\App\Models\Admin;
+use Application\System\Session;
 use Application\System\Validation;
 
 class AdminController extends Controller
@@ -26,8 +28,6 @@ class AdminController extends Controller
     }
 
 
-
-
     public function addAction()
     {
         $validate = new Validation();
@@ -41,15 +41,15 @@ class AdminController extends Controller
         $validate->validate($rules);
 
         if (!$validate->isValid()) {
-            //rediect back with validation message
+            Session::set('validation_errors', $validate->getErrors());
+            return redirect()->back();
         }
-
-        //manage data
-
-        //model call
-        //insert data
-        //check the response
-
-        //error success
+        $admin = new Admin();
+        $data['name'] = $_POST['name'];
+        $data['email'] = $_POST['email'];
+        $data['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        if ($admin->insert($data)) {
+            return redirect()->to('admin');
+        }
     }
 }

@@ -5,6 +5,10 @@ class Validation
 {
     private $_errors = [];
 
+    /**
+     * Validation Logic (empty,min,max,email)
+     * @param $ruleCollections
+     */
     public function validate($ruleCollections)
     {
         foreach ($ruleCollections as $field => $rules) {
@@ -28,7 +32,7 @@ class Validation
                             $this->setRules($field, $field . ' must be less than ' . $maxValue . ' characters');
                         }
                     } else if ($rule === 'email') {
-                        if (!filter_var($_POST[$field], FILTER_VALIDATE_BOOLEAN)) {
+                        if (!filter_var($_POST[$field], FILTER_VALIDATE_EMAIL)) {
                             $this->setRules($field, $field . ' should be a valid email address');
                         }
                     } else if (preg_match('/matches:/', $rule)) {
@@ -44,21 +48,35 @@ class Validation
         }
     }
 
+    /**
+     * Checks to see if the validation passed or not
+     * @return bool
+     */
     public function isValid()
     {
         return empty($this->_errors);
     }
 
+
+    /**
+     * Get all the validation fail errors if any
+     * @return array
+     */
     public function getErrors()
     {
         return $this->_errors;
     }
 
 
+    /**
+     *
+     * @param $field
+     * @param $message
+     * @return bool
+     */
     private function setRules($field, $message)
     {
         if (empty($field)) return false;
-
         $this->_errors[$field] = $message;
     }
 }

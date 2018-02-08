@@ -5,6 +5,7 @@ class App
 {
     public function run()
     {
+        session_start();
         $this->errorConfig();
         $this->parseRoute();
     }

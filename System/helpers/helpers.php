@@ -41,3 +41,30 @@ if (!function_exists('url')) {
         return $host;
     }
 }
+
+if (!function_exists('redirect')) {
+    function redirect()
+    {
+        $redirect = new \Application\System\Redirect();
+        return $redirect;
+    }
+}
+
+if (!function_exists('validationErrors')) {
+    function validationErrors(string $className = '')
+    {
+        $errors = \Application\System\Session::get('validation_errors');
+        if (empty($errors)) return '';
+
+        $output = '';
+        foreach ($errors as $key => $error) {
+            $output .= "<div class='" . $className . ' ' . $key . "'>";
+            $output .= ucfirst($error);
+            $output .= "</div>";
+        }
+
+        \Application\System\Session::delete('validation_errors');
+
+        return $output;
+    }
+}

@@ -23,6 +23,5 @@ class Server
 
     public static function url()
     {
-
     }
 }
