@@ -10,9 +10,9 @@ $route->post('contact', 'Frontend\AppController@contactAction');
 
 
 //Admin Route
-
 $route->get('/dashboard', 'Backend\BackendController@index');
 $route->get('/admin', 'Backend\AdminController@index');
 $route->get('/admin/add', 'Backend\AdminController@add');
+$route->get('/admin/delete', 'Backend\AdminController@delete');
 
 $route->post('/admin/add', 'Backend\AdminController@addAction');

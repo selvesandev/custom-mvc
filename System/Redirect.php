@@ -9,7 +9,7 @@ class Redirect
         $requestHeader = getallheaders();
         if (isset($requestHeader['Referer']))
             header('Location: ' . $requestHeader['Referer']);
-        return true;
+        return $this;
     }
 
     public function to(string $redirectPath)

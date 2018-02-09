@@ -1,6 +1,9 @@
 <?php
 
 namespace Application\System;
+
+use Application\System\Exception\NotFoundException404;
+
 class App
 {
     public function run()
@@ -14,6 +17,10 @@ class App
     {
         $route = new Route();
         require_once rootPath('routes/routes.php');
+        if (!$route->routeExists()) {
+            $uri = Server::uri();
+            throw new NotFoundException404("Page Nout Found {$uri}");
+        }
         unset($route);
     }
 

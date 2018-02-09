@@ -7,6 +7,9 @@ use Application\System\Exception\NotFoundException;
 
 class Route
 {
+
+    private $_route_found = false;
+
     /**
      * @param $controllerMethod
      * @throws InvalidRequestException
@@ -52,6 +55,7 @@ class Route
         $requestUri = trim(trim($requestUri, '/'));
 
         if ($uri === $requestUri) {
+            $this->_route_found = true;
             $this->callController($controllerMethod);
         }
     }
@@ -70,7 +74,13 @@ class Route
         $requestUri = trim(trim($requestUri, '/'));
 
         if ($uri === $requestUri) {
+            $this->_route_found = true;
             $this->callController($controllerMethod);
         }
+    }
+
+    public function routeExists()
+    {
+        return $this->_route_found;
     }
 }

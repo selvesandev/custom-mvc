@@ -76,7 +76,7 @@ class Database
             $stmt = $this->_connection->prepare($query);
             $stmt->execute(array_values($data));
             return $this->_connection->lastInsertId();
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             die($e->getMessage());
         }
     }
@@ -129,7 +129,7 @@ class Database
             $stmt = $this->_connection->prepare($query);
             $stmt->execute($execData);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             die($e->getMessage());
         }
     }
@@ -169,7 +169,7 @@ class Database
         if (empty($column)) throw new Exception('Columns are mandatory when ordering data at line no ' . $lineNumber);
 
         if (!in_array($type, ['asc', 'desc'])) {
-            throw new Exception('Order can be only Asc or Desc');
+            throw new \Exception('Order can be only Asc or Desc');
         }
 
 
@@ -225,8 +225,8 @@ class Database
         try {
             $stmt = $this->_connection->prepare($query);
             $stmt->execute($execData);
-            return $stmt->fetchAll(PDO::FETCH_CLASS);
-        } catch (PDOException $e) {
+            return $stmt->fetchAll(\PDO::FETCH_CLASS);
+        } catch (\PDOException $e) {
             die($e->getMessage());
         }
 
@@ -254,7 +254,7 @@ class Database
             $stmt = $this->_connection->prepare($query);
             $stmt->execute($execData);
             return true;
-        } catch (PDOException $e) {
+        } catch (\PDOException $e) {
             die($e->getMessage());
         }
     }

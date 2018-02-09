@@ -42,6 +42,9 @@ if (!function_exists('url')) {
     }
 }
 
+/**
+ *
+ */
 if (!function_exists('redirect')) {
     function redirect()
     {
@@ -50,6 +53,9 @@ if (!function_exists('redirect')) {
     }
 }
 
+/**
+ *
+ */
 if (!function_exists('validationErrors')) {
     function validationErrors(string $className = '')
     {
@@ -65,6 +71,28 @@ if (!function_exists('validationErrors')) {
 
         \Application\System\Session::delete('validation_errors');
 
+        return $output;
+    }
+}
+
+if (!function_exists('message')) {
+    function message()
+    {
+        $successMessage = \Application\System\Session::get('success');
+        $failMessage = \Application\System\Session::get('success');
+        $output = '';
+        if (!empty($successMessage)) {
+            $output = "<div class='alert alert-success'>";
+            $output .= $successMessage;
+            $output .= "</div>";
+
+            \Application\System\Session::delete('success');
+        } else if (!empty($failMessage)) {
+            $output = "<div class='alert alert-danger'>";
+            $output .= $failMessage;
+            $output .= "</div>";
+            \Application\System\Session::delete('fail');
+        }
         return $output;
     }
 }

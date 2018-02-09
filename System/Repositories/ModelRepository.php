@@ -16,5 +16,5 @@ interface ModelRepository
 
     public function update(array $data);
 
-    public function delete();
+    public function delete($primaryKeyValue);
 }
