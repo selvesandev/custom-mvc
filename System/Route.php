@@ -10,11 +10,6 @@ class Route
 
     private $_route_found = false;
 
-    /**
-     * @param $controllerMethod
-     * @throws InvalidRequestException
-     * @throws NotFoundException
-     */
     private function callController($controllerMethod)
     {
         $controllerMethod = explode('@', $controllerMethod);
@@ -37,6 +32,19 @@ class Route
         return true;
     }
 
+    private function parseMiddleware(array $middlewares)
+    {
+        $middlewarePath = '\Application\App\Middleware\\';
+        foreach ($middlewares as $middleware) {
+            $middlewareClass = $middlewarePath . $middleware;
+            if (!class_exists($middlewareClass)) throw new NotFoundException('Middleware not found');
+
+            $middlewareObj = new $middlewareClass();
+            $middlewareObj->run();
+        }
+
+    }
+
 
     /**
      * @param string $requestUri
@@ -44,9 +52,8 @@ class Route
      * @return bool
      * @throws InvalidRequestException
      */
-    public function get(string $requestUri, string $controllerMethod)
+    public function get(string $requestUri, string $controllerMethod, array $middleware = [])
     {
-
         if (!Request::method('get')) return false;
 
         if (empty($requestUri)) throw new InvalidRequestException('Request Uri cannot be empty');
@@ -55,6 +62,9 @@ class Route
         $requestUri = trim(trim($requestUri, '/'));
 
         if ($uri === $requestUri) {
+
+            if (!empty($middleware) && is_array($middleware)) $this->parseMiddleware($middleware);
+
             $this->_route_found = true;
             $this->callController($controllerMethod);
         }
@@ -65,7 +75,7 @@ class Route
      * @param string $controllerMethod
      * @return bool
      */
-    public function post(string $requestUri, string $controllerMethod)
+    public function post(string $requestUri, string $controllerMethod, array $middleware = [])
     {
         if (!Request::method('post')) return false;
 

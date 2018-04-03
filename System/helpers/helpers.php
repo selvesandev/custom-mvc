@@ -79,13 +79,12 @@ if (!function_exists('message')) {
     function message()
     {
         $successMessage = \Application\System\Session::get('success');
-        $failMessage = \Application\System\Session::get('success');
+        $failMessage = \Application\System\Session::get('fail');
         $output = '';
         if (!empty($successMessage)) {
             $output = "<div class='alert alert-success'>";
             $output .= $successMessage;
             $output .= "</div>";
-
             \Application\System\Session::delete('success');
         } else if (!empty($failMessage)) {
             $output = "<div class='alert alert-danger'>";

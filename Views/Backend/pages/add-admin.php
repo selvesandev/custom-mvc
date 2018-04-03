@@ -12,12 +12,10 @@
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
-
-
                         <?= validationErrors('alert alert-danger') ?>
 
-
-                        <form method="post" class="form-horizontal form-label-left input_mask">
+                        <form enctype="multipart/form-data" method="post"
+                              class="form-horizontal form-label-left input_mask">
                             <div class="col-md-6 col-sm-6 col-xs-12 form-group has-feedback">
                                 <input type="text" name="name" class="form-control has-feedback-left" id="inputSuccess2"
                                        placeholder="Nick Name">
@@ -49,15 +47,22 @@
                                        name="image">
                                 <span class="fa fa-lock form-control-feedback left" aria-hidden="true"></span>
                             </div>
+
+
+                            <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                                <select multiple class="form-control" name="privileges[]" id="privileges">
+                                    <?php foreach ($privileges as $privilege): ?>
+                                        <option value="<?= $privilege->id ?>"><?= $privilege->type ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
                             <div class="ln_solid"></div>
                             <div class="form-group">
                                 <div class="col-md-9 col-sm-9 col-xs-12">
                                     <button type="submit" class="btn btn-success">Submit</button>
                                 </div>
                             </div>
-
                         </form>
-
                     </div>
                 </div>
             </div>

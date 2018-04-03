@@ -26,15 +26,39 @@ class Model implements ModelRepository
         return $data;
     }
 
-    public function getAll()
+    /**
+     * Fetch all data attach criteria if necessary
+     * @param array $criteria
+     * @return mixed
+     */
+    public function getAll(array $criteria = [])
     {
+        if (!empty($criteria))
+            $this->_connection->where($criteria);
+
         return $this->_connection->select($this->tableName, $this->fillable);
     }
 
 
-    public function getSingle()
+    public function getSingle(array $criteria = [])
     {
+        $data = $this->getAll($criteria);
+        if (!count($data)) return [];
+
+        return $data[0];
     }
+
+
+    public function find($id)
+    {
+        if (empty($id)) return false;
+        $data = $this->_connection->where([$this->primaryKey => $id])->select($this->tableName, $this->fillable);
+
+        if (!$data) return false;
+
+        return $data[0];
+    }
+
 
     public function countAll()
     {
@@ -45,18 +69,30 @@ class Model implements ModelRepository
 
     }
 
+    /**
+     * Insert
+     * @param array $data
+     * @return mixed
+     */
     public function insert(array $data)
     {
         $data = $this->addTimeStamps($data);
         return $this->_connection->insert($this->tableName, $data);
     }
 
-    public function update(array $data)
+    public function update(array $data, $id)
     {
+        return $this->_connection->where([$this->primaryKey => $id])->update($this->tableName, $data);
     }
 
+    /**
+     * Delete
+     * @param $primaryKeyValue
+     * @return bool
+     */
     public function delete($primaryKeyValue)
     {
         return $this->_connection->where([$this->primaryKey => $primaryKeyValue])->delete($this->tableName);
     }
+
 }

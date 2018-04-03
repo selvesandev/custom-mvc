@@ -4,9 +4,9 @@ namespace Application\System\Repositories;
 
 interface ModelRepository
 {
-    public function getAll();
+    public function getAll(array $criteria = []);
 
-    public function getSingle();
+    public function getSingle(array $criteria = []);
 
     public function countAll();
 
@@ -14,7 +14,9 @@ interface ModelRepository
 
     public function insert(array $data);
 
-    public function update(array $data);
+    public function update(array $data,$id);
 
     public function delete($primaryKeyValue);
+
+    public function find($id);
 }

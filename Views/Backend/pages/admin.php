@@ -7,14 +7,16 @@
             </div>
 
             <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
-                        <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
+                <form method="get" action="<?= url('/admin') ?>">
+                    <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
+                        <div class="input-group">
+                            <input type="text" class="form-control" name="search" placeholder="Search for...">
+                            <span class="input-group-btn">
+                      <button class="btn btn-default" type="submit">Go!</button>
                     </span>
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -37,6 +39,7 @@
                                 <th>Nick Name</th>
                                 <th>Email</th>
                                 <th>Image</th>
+                                <th>Privileges</th>
                                 <th>Status</th>
                                 <th>Created at</th>
                                 <th>Action</th>
@@ -51,8 +54,9 @@
                                         <th scope="row"><?= ++$key ?></th>
                                         <td><?= $admin->name ?></td>
                                         <td><?= $admin->email ?></td>
+                                        <td></td>
                                         <td>
-
+                                            <?= $admin->privileges_type ?>
                                         </td>
                                         <td>
                                             <form action="" method="post">
@@ -81,7 +85,8 @@
                                 <?php endforeach;
                             } else { ?>
                                 <tr>
-                                    <td colspan="7">No Admin Found. You can add one <a href="<?= url('admin/add') ?>"><u>Here</u></a>
+                                    <td colspan="7">No Admin Found. You can add one <a
+                                                href="<?= url('admin/add') ?>"><u>Here</u></a>
                                     </td>
                                 </tr>
                             <?php } ?>

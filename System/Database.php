@@ -26,7 +26,7 @@ class Database
     private function connect()
     {
         try {
-            $this->_connection = new \PDO('mysql:host=127.0.0.1;dbname=php7', 'root', 'secret');
+            $this->_connection = new \PDO('mysql:host=' . Config::get('database.db_host') . ';dbname=' . Config::get('database.db_name'), Config::get('database.db_uname'), Config::get('database.db_password'));
             $this->_connection->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
         } catch (\PDOException $e) {
             die($e->getMessage());
@@ -138,6 +138,20 @@ class Database
     public function count()
     {
         //Homework
+    }
+
+
+    public function query(string $query)
+    {
+        $execData = $this->_criteria_value;
+
+        try {
+            $stmt = $this->_connection->prepare($query);
+            $stmt->execute($execData);
+            return $stmt->fetchAll(\PDO::FETCH_CLASS);
+        } catch (\PDOException $e) {
+            die($e->getMessage());
+        }
     }
 
 

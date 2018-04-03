@@ -21,7 +21,6 @@ class Config
 
         $getValues = explode('.', $getValue);
 
-
         if (count($getValues) < 1) throw new InvalidRequestException('Must pass config keys');
 
         $file = array_shift($getValues);

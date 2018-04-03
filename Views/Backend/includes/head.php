@@ -15,6 +15,9 @@
     <link href="<?= url('lib/font-awesome/css/font-awesome.min.css') ?>" rel="stylesheet">
     <!-- NProgress -->
     <link href="<?= url('lib/nprogress/nprogress.css') ?>" rel="stylesheet">
+    <!-- select2 -->
+    <link rel="stylesheet" href="<?= url('lib/select2/dist/css/select2.min.css') ?>">
+
     <!-- Custom Theme Style -->
     <link href="<?= url('css/custom.min.css') ?>" rel="stylesheet">
 </head>
